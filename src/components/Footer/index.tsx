@@ -11,26 +11,6 @@ const Footer: React.FC = () => {
         background: 'none',
       }}
       copyright={`${currentYear} ${defaultMessage}`}
-      links={[
-        {
-          key: 'NX智能 BI',
-          title: 'NX智能 BI',
-          href: 'https://pro.ant.design',
-          blankTarget: true,
-        },
-        {
-          key: 'github',
-          title: <GithubOutlined />,
-          href: 'https://github.com/ant-design/ant-design-pro',
-          blankTarget: true,
-        },
-        {
-          key: 'NX智能 BI',
-          title: 'NX智能 BI',
-          href: 'https://ant.design',
-          blankTarget: true,
-        },
-      ]}
     />
   );
 };
