@@ -17,9 +17,19 @@ export default [
   },
   {
     path: '/welcome',
-    name: 'welcome',
+    name: '产品介绍',
     icon: 'smile',
     component: './Welcome',
+  },
+  {
+    path: '/',
+    redirect: '/add_chart',
+  },
+  {
+    path: '/add_chart',
+    icon: 'barChart',
+    name: '智能分析',
+    component: './AddChart',
   },
   {
     path: '/admin',
@@ -37,12 +47,6 @@ export default [
         component: './Admin',
       },
     ],
-  },
-  {
-    name: 'list.table-list',
-    icon: 'table',
-    path: '/list',
-    component: './TableList',
   },
   {
     path: '/',
