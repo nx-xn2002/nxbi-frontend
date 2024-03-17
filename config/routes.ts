@@ -23,13 +23,19 @@ export default [
   },
   {
     path: '/',
-    redirect: '/add_chart',
+    redirect: '/welcome',
   },
   {
     path: '/add_chart',
-    icon: 'barChart',
+    icon: 'editOutlined',
     name: '智能分析',
     component: './AddChart',
+  },
+  {
+    path: '/my_chart',
+    icon: 'barChart',
+    name: '我的图表',
+    component: './MyChart',
   },
   {
     path: '/admin',

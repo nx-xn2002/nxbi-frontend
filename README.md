@@ -1,57 +1,41 @@
-# NX智能 BI
+# NX 智能 BI 系统
 
-This project is initialized with [NX智能 BI](https://pro.ant.design). Follow is the quick guide for how to use.
+## 项目介绍
 
-## Environment Prepare
+基于 Spring Boot + AIGC 的智能数据分析平台。区别于传统BI，用户只需要导入Excel原始数据集，并输入分析诉求，就能自动化生成可视化图表及分析结论，提高数据分析效率
 
-Install `node_modules`:
 
-```bash
-npm install
-```
 
-or
+### 技术栈
 
-```bash
-yarn
-```
+#### 前端
 
-## Provided Scripts
+1. React
+2. Umi + Ant Design Pro
+3. 可视化开发库（Echarts + HighCharts + AntV）
+   使用Echarts因为其兼容性较好
+4. umi openapi 代码生成（自动生成后端调用代码）
 
-NX智能 BI provides some useful script to help you quick start and build with web project, code style check and test.
+#### 后端
 
-Scripts provided in `package.json`. It's safe to modify or add additional script:
+1. Spring Boot（万用java后端模板，快速搭建基础框架）
+2. MySQL数据库
+3. MyBatis Plus数据访问框架
+4. AI能力（Open AI接口开发/现成AI接口）
+5. Excel上传和数据的解析（Easy Excel）
+6. Swagger + Knife4j项目接口文档
+7. Hutool工具库
 
-### Start project
 
-```bash
-npm start
-```
 
-### Build project
+## 功能展示
 
-```bash
-npm run build
-```
+## 图表分析
 
-### Check code style
+![image-20240317144026870](images/image-20240317144026870.png)
 
-```bash
-npm run lint
-```
+![image-20240317144149958](images/image-20240317144149958.png)
 
-You can also use script to auto fix some lint error:
+## 图表管理
 
-```bash
-npm run lint:fix
-```
-
-### Test code
-
-```bash
-npm test
-```
-
-## More
-
-You can view full document on our [official website](https://pro.ant.design). And welcome any feedback in our [github](https://github.com/ant-design/ant-design-pro).
+![image-20240317144218205](images/image-20240317144218205.png)

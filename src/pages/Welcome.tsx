@@ -1,156 +1,51 @@
 import { PageContainer } from '@ant-design/pro-components';
-import { useModel } from '@umijs/max';
-import { Card, theme } from 'antd';
+import { Card, Collapse, CollapseProps, List } from 'antd';
 import React from 'react';
 
-const InfoCard: React.FC<{
-  title: string;
-  index: number;
-  desc: string;
-  href: string;
-}> = ({ title, href, index, desc }) => {
-  const { useToken } = theme;
-
-  const { token } = useToken();
-
-  return (
-    <div
-      style={{
-        backgroundColor: token.colorBgContainer,
-        boxShadow: token.boxShadow,
-        borderRadius: '8px',
-        fontSize: '14px',
-        color: token.colorTextSecondary,
-        lineHeight: '22px',
-        padding: '16px 19px',
-        minWidth: '220px',
-        flex: 1,
-      }}
-    >
-      <div
-        style={{
-          display: 'flex',
-          gap: '4px',
-          alignItems: 'center',
-        }}
-      >
-        <div
-          style={{
-            width: 48,
-            height: 48,
-            lineHeight: '22px',
-            backgroundSize: '100%',
-            textAlign: 'center',
-            padding: '8px 16px 16px 12px',
-            color: '#FFF',
-            fontWeight: 'bold',
-            backgroundImage:
-              "url('https://gw.alipayobjects.com/zos/bmw-prod/daaf8d50-8e6d-4251-905d-676a24ddfa12.svg')",
-          }}
-        >
-          {index}
-        </div>
-        <div
-          style={{
-            fontSize: '16px',
-            color: token.colorText,
-            paddingBottom: 8,
-          }}
-        >
-          {title}
-        </div>
-      </div>
-      <div
-        style={{
-          fontSize: '14px',
-          color: token.colorTextSecondary,
-          textAlign: 'justify',
-          lineHeight: '22px',
-          marginBottom: 8,
-        }}
-      >
-        {desc}
-      </div>
-      <a href={href} target="_blank" rel="noreferrer">
-        了解更多 {'>'}
-      </a>
-    </div>
-  );
-};
-
+const data = [
+  '1.简化导入和分析流程：用户只需将Excel原始数据集导入平台，并输入他们的分析需求，便能自动化生成可视化图表和详尽的分析结论。无需繁琐的手动操作和编写复杂的查询语句，大大提高了数据分析的效率。',
+  '2.智能化数据分析：NX智能BI拥有强大的人工智能算法，能够自动识别数据集中的潜在模式和关联规律。它能够智能地进行数据挖掘、聚类分析、预测模型构建等复杂分析任务，让用户能够快速深入洞察数据背后的价值信息。',
+  '3.可视化分析洞见：NX智能BI以直观和易读的可视化图表呈现分析结果，帮助用户更好地理解数据的含义和趋势。通过图表、图形和图像的形式，用户可以直观地发现数据中的模式、趋势和异常，从而更准确地做出决策。',
+];
+const items: CollapseProps['items'] = [
+  {
+    key: '1',
+    label: '步骤一：输入分析目标',
+    children: <img src="/images/example1.png" />,
+  },
+  {
+    key: '2',
+    label: '步骤二：上传分析数据',
+    children: <img src="/images/example2.png" />,
+  },
+  {
+    key: '3',
+    label: '步骤三：查看结果',
+    children: <img src="/images/example3.png" width={'80%'} />,
+  },
+];
 const Welcome: React.FC = () => {
-  const { token } = theme.useToken();
-  const { initialState } = useModel('@@initialState');
   return (
     <PageContainer>
-      <Card
-        style={{
-          borderRadius: 8,
-        }}
-        bodyStyle={{
-          backgroundImage:
-            initialState?.settings?.navTheme === 'realDark'
-              ? 'background-image: linear-gradient(75deg, #1A1B1F 0%, #191C1F 100%)'
-              : 'background-image: linear-gradient(75deg, #FBFDFF 0%, #F5F7FF 100%)',
-        }}
-      >
-        <div
-          style={{
-            backgroundPosition: '100% -30%',
-            backgroundRepeat: 'no-repeat',
-            backgroundSize: '274px auto',
-            backgroundImage:
-              "url('https://gw.alipayobjects.com/mdn/rms_a9745b/afts/img/A*BuFmQqsB2iAAAAAAAAAAAAAAARQnAQ')",
-          }}
-        >
-          <div
-            style={{
-              fontSize: '20px',
-              color: token.colorTextHeading,
-            }}
-          >
-            欢迎使用 NX智能 BI
-          </div>
-          <p
-            style={{
-              fontSize: '14px',
-              color: token.colorTextSecondary,
-              lineHeight: '22px',
-              marginTop: 16,
-              marginBottom: 32,
-              width: '65%',
-            }}
-          >
-            NX智能 BI 是一个整合了 umi，NX智能 BI 和 ProComponents
-            的脚手架方案。致力于在设计规范和基础组件的基础上，继续向上构建，提炼出典型模板/业务组件/配套设计资源，进一步提升企业级中后台产品设计研发过程中的『用户』和『设计者』的体验。
-          </p>
-          <div
-            style={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              gap: 16,
-            }}
-          >
-            <InfoCard
-              index={1}
-              href="https://umijs.org/docs/introduce/introduce"
-              title="了解 umi"
-              desc="umi 是一个可扩展的企业级前端应用框架,umi 以路由为基础的，同时支持配置式路由和约定式路由，保证路由的功能完备，并以此进行功能扩展。"
-            />
-            <InfoCard
-              index={2}
-              title="了解 NX智能 BI"
-              href="https://ant.design"
-              desc="antd 是基于 NX智能 BI 设计体系的 React UI 组件库，主要用于研发企业级中后台产品。"
-            />
-            <InfoCard
-              index={3}
-              title="了解 Pro Components"
-              href="https://procomponents.ant.design"
-              desc="ProComponents 是一个基于 NX智能 BI 做了更高抽象的模板组件，以 一个组件就是一个页面为开发理念，为中后台开发带来更好的体验。"
-            />
-          </div>
-        </div>
+      <Card title="产品介绍" hoverable={true}>
+        <List
+          size="large"
+          header={
+            <div>
+              <b>NX智能BI</b>是一款创新的智能数据分析平台，它采用了先进的技术和框架，包括Spring
+              Boot、MQ和AIGC，为用户提供了一种高效且智能的数据分析解决方案。相比传统的BI工具，NX智能BI具有以下突出特点：
+            </div>
+          }
+          footer={
+            <div>
+              总之，NX智能BI通过简化分析流程、智能化分析、可视化分析、个性化定制和高效的数据处理能力，为用户提供了一种高效、智能且可靠的数据分析平台，帮助用户更好地挖掘数据的价值，优化决策过程。
+            </div>
+          }
+          bordered
+          dataSource={data}
+          renderItem={(item) => <List.Item>{item}</List.Item>}
+        />
+        <Collapse items={items} defaultActiveKey={['1', '2', 3]} />
       </Card>
     </PageContainer>
   );
