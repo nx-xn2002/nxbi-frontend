@@ -1,18 +1,19 @@
-import { listMyChartByPageUsingPost } from '@/services/nxbi/chartController';
-import { useModel } from '@@/exports';
-import { Avatar, Card, List, message } from 'antd';
+import {listMyChartByPageUsingPost} from '@/services/nxbi/chartController';
+import {useModel} from '@@/exports';
+import {Avatar, Card, List, message} from 'antd';
 import Search from 'antd/es/input/Search';
 import ReactECharts from 'echarts-for-react';
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
+import {whitespace} from "stylis";
 
 const MyChart: React.FC = () => {
-  const { initialState } = useModel('@@initialState');
-  const { currentUser } = initialState || {};
+  const {initialState} = useModel('@@initialState');
+  const {currentUser} = initialState || {};
   const initSearchParams = {
     current: '1',
     pageSize: '5',
   };
-  const [searchParams, setSearchParams] = useState<API.ChartQueryRequest>({ ...initSearchParams });
+  const [searchParams, setSearchParams] = useState<API.ChartQueryRequest>({...initSearchParams});
   const [chartList, setChartList] = useState<API.Chart[]>();
   const [total, setTotal] = useState<string>('0');
   const loadData = async () => {
@@ -80,9 +81,10 @@ const MyChart: React.FC = () => {
                       }}
                     />
                   }
+
                 />
-                {'分析结论：' + item.genResult}
-                <ReactECharts option={JSON.parse(item.genChart ?? '{}')} />
+                <div style={{whiteSpace: 'pre-line'}}>{'分析结论：' + item.genResult}</div>
+                <ReactECharts option={JSON.parse(item.genChart ?? '{}')}/>
               </List.Item>
             </Card>
           )}

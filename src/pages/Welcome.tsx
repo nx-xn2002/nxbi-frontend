@@ -33,7 +33,7 @@ const Welcome: React.FC = () => {
           header={
             <div>
               <b>NX智能BI</b>是一款创新的智能数据分析平台，它采用了先进的技术和框架，包括Spring
-              Boot、MQ和AIGC，为用户提供了一种高效且智能的数据分析解决方案。相比传统的BI工具，NX智能BI具有以下突出特点：
+              Boot、MQ 和 AIGC，为用户提供了一种高效且智能的数据分析解决方案。相比传统的 BI 工具，NX 智能 BI 具有以下突出特点：
             </div>
           }
           footer={
