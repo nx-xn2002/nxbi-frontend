@@ -1,6 +1,6 @@
-import {listMyChartByPageUsingPost} from '@/services/nxbi/chartController';
+import {deleteChartUsingPost, listMyChartByPageUsingPost} from '@/services/nxbi/chartController';
 import {useModel} from '@@/exports';
-import {Avatar, Card, List, message, Result} from 'antd';
+import {Avatar, Button, Card, List, message, Popconfirm, PopconfirmProps, Result} from 'antd';
 import Search from 'antd/es/input/Search';
 import ReactECharts from 'echarts-for-react';
 import React, {useEffect, useState} from 'react';
@@ -38,6 +38,23 @@ const MyChart: React.FC = () => {
       message.error('获取图表失败' + e.message);
     }
   };
+  const handleDelete = async (id: number) => {
+    try {
+      const result = await deleteChartUsingPost({id});
+      if (result && result.data) {
+        if (result.data) {
+          await loadData();
+          message.success('删除成功');
+        }
+      }
+    } catch (error) {
+      message.error('删除时发生错误');
+    }
+  };
+  const cancel: PopconfirmProps['onCancel'] = () => {
+    message.info('操作已取消');
+  };
+
   useEffect(() => {
     loadData();
   }, [searchParams]);
@@ -97,17 +114,27 @@ const MyChart: React.FC = () => {
                     <>
                       <div style={{whiteSpace: 'pre-line'}}>{'分析结论：' + item.genResult}</div>
                       <ReactECharts option={JSON.parse(item.genChart ?? '{}')}/>
-                      <div style={{ fontFamily: "'黑体', simhei, sans-serif" }}>
+                      <div style={{fontFamily: "'黑体', simhei, sans-serif", textAlign: 'right'}}>
                         {
                           item.updateTime ? '创建时间：' + new Date(item.updateTime).toLocaleString() : '创建时间：未知'
                         }
                       </div>
+                      <Popconfirm
+                        title="删除图表"
+                        description="您确定要删除该图表吗？此操作不可恢复。"
+                        onConfirm={() => (item.id !== undefined ? handleDelete(item.id) : null)}
+                        onCancel={cancel}
+                        okText="确定"
+                        cancelText="取消"
+                      >
+                        <Button danger>删除图表</Button>
+                      </Popconfirm>
                     </>
                   }
                   {
                     item.status === 'failed' &&
                     <>
-                    <Result
+                      <Result
                         status="error"
                         title="图表生成失败"
                         subTitle={item.execMessage}
