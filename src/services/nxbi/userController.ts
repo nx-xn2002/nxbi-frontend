@@ -67,6 +67,14 @@ export async function getUserVoByIdUsingGet(
   });
 }
 
+/** getConn GET /api/user/getConn */
+export async function getConnUsingGet(options?: { [key: string]: any }) {
+  return request<API.SseEmitter>('/api/user/getConn', {
+    method: 'GET',
+    ...(options || {}),
+  });
+}
+
 /** listUserByPage POST /api/user/list/page */
 export async function listUserByPageUsingPost(
   body: API.UserQueryRequest,

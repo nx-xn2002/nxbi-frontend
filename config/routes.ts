@@ -28,8 +28,14 @@ export default [
   {
     path: '/add_chart',
     icon: 'editOutlined',
-    name: '智能分析',
+    name: '智能分析（同步提交）',
     component: './AddChart',
+  },
+  {
+    path: '/add_chart_async',
+    icon: 'editOutlined',
+    name: '智能分析（异步提交）',
+    component: './AddChartAsync',
   },
   {
     path: '/my_chart',

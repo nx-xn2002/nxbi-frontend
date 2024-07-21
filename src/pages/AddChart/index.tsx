@@ -45,7 +45,7 @@ const AddChart: React.FC = () => {
     <div className="add-chart">
       <Row gutter={24}>
         <Col span={12}>
-          <Card title="智能分析">
+          <Card title="智能分析（同步提交）">
             <Form
               name="add-chart"
               labelAlign="left"

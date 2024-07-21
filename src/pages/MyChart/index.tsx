@@ -1,17 +1,19 @@
 import {listMyChartByPageUsingPost} from '@/services/nxbi/chartController';
 import {useModel} from '@@/exports';
-import {Avatar, Card, List, message} from 'antd';
+import {Avatar, Card, List, message, Result} from 'antd';
 import Search from 'antd/es/input/Search';
 import ReactECharts from 'echarts-for-react';
 import React, {useEffect, useState} from 'react';
-import {whitespace} from "stylis";
+
 
 const MyChart: React.FC = () => {
   const {initialState} = useModel('@@initialState');
   const {currentUser} = initialState || {};
   const initSearchParams = {
-    current: '1',
-    pageSize: '5',
+    current: 1,
+    pageSize: 5,
+    sortOrder: 'desc',
+    sortField: 'createTime',
   };
   const [searchParams, setSearchParams] = useState<API.ChartQueryRequest>({...initSearchParams});
   const [chartList, setChartList] = useState<API.Chart[]>();
@@ -21,7 +23,14 @@ const MyChart: React.FC = () => {
       const res = await listMyChartByPageUsingPost(searchParams);
       if (res.data) {
         setChartList(res.data.records ?? []);
-        setTotal(res.data.total ?? '0');
+        setTotal(res.data.total?.toString() ?? '0');
+        if (res.data.records) {
+          res.data.records.forEach(data => {
+            const chartOption = JSON.parse(data.genChart ?? '{}');
+            chartOption.title = undefined;
+            data.genChart = JSON.stringify(chartOption);
+          })
+        }
       } else {
         message.error('获取图表失败');
       }
@@ -55,12 +64,12 @@ const MyChart: React.FC = () => {
             onChange: (page, pageSize) => {
               setSearchParams({
                 ...searchParams,
-                current: page.toString(),
-                pageSize: pageSize.toString(),
+                current: page,
+                pageSize: pageSize,
               });
             },
-            current: parseInt(searchParams.current as string),
-            pageSize: parseInt(searchParams.pageSize as string),
+            current: searchParams.current,
+            pageSize: searchParams.pageSize,
             total: parseInt(total),
           }}
           dataSource={chartList}
@@ -81,10 +90,51 @@ const MyChart: React.FC = () => {
                       }}
                     />
                   }
-
                 />
-                <div style={{whiteSpace: 'pre-line'}}>{'分析结论：' + item.genResult}</div>
-                <ReactECharts option={JSON.parse(item.genChart ?? '{}')}/>
+                <>
+                  {
+                    item.status === 'succeed' &&
+                    <>
+                      <div style={{whiteSpace: 'pre-line'}}>{'分析结论：' + item.genResult}</div>
+                      <ReactECharts option={JSON.parse(item.genChart ?? '{}')}/>
+                      <div style={{ fontFamily: "'黑体', simhei, sans-serif" }}>
+                        {
+                          item.updateTime ? '创建时间：' + new Date(item.updateTime).toLocaleString() : '创建时间：未知'
+                        }
+                      </div>
+                    </>
+                  }
+                  {
+                    item.status === 'failed' &&
+                    <>
+                    <Result
+                        status="error"
+                        title="图表生成失败"
+                        subTitle={item.execMessage}
+                      />
+                    </>
+                  }
+                  {
+                    item.status === 'wait' &&
+                    <>
+                      <Result
+                        status="warning"
+                        title="待生成"
+                        subTitle={item.execMessage ?? "当前图表生成队列繁忙，请耐心等待"}
+                      />
+                    </>
+                  }
+                  {
+                    item.status === 'running' &&
+                    <>
+                      <Result
+                        status="info"
+                        title="图表生成中"
+                        subTitle={item.execMessage}
+                      />
+                    </>
+                  }
+                </>
               </List.Item>
             </Card>
           )}

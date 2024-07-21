@@ -1,7 +1,7 @@
-import { GithubOutlined } from '@ant-design/icons';
-import { DefaultFooter } from '@ant-design/pro-components';
+import {DefaultFooter} from '@ant-design/pro-components';
 import '@umijs/max';
 import React from 'react';
+
 const Footer: React.FC = () => {
   const defaultMessage = '倪响出品';
   const currentYear = new Date().getFullYear();
