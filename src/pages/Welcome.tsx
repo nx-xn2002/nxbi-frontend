@@ -1,5 +1,5 @@
-import { PageContainer } from '@ant-design/pro-components';
-import { Card, Collapse, CollapseProps, List } from 'antd';
+import {PageContainer} from '@ant-design/pro-components';
+import {Card, Collapse, CollapseProps, List} from 'antd';
 import React from 'react';
 
 const data = [
@@ -11,17 +11,17 @@ const items: CollapseProps['items'] = [
   {
     key: '1',
     label: '步骤一：输入分析目标',
-    children: <img src="/images/example1.png" />,
+    children: <img src="/images/example1.png"/>,
   },
   {
     key: '2',
     label: '步骤二：上传分析数据',
-    children: <img src="/images/example2.png" />,
+    children: <img src="/images/example2.png"/>,
   },
   {
     key: '3',
     label: '步骤三：查看结果',
-    children: <img src="/images/example3.png" width={'80%'} />,
+    children: <img src="/images/example3.png" width={'80%'}/>,
   },
 ];
 const Welcome: React.FC = () => {
@@ -33,11 +33,11 @@ const Welcome: React.FC = () => {
           header={
             <div>
               <b>NX智能BI</b>是一款创新的智能数据分析平台，它采用了先进的技术和框架，包括Spring
-              Boot、MQ 和 AIGC，为用户提供了一种高效且智能的数据分析解决方案。相比传统的 BI 工具，NX 智能 BI 具有以下突出特点：
+              Boot 和 AIGC，为用户提供了一种高效且智能的数据分析解决方案。相比传统的 BI 工具，NX 智能 BI 具有以下突出特点：
             </div>
           }
           footer={
-            <div>
+            <div style={{whiteSpace: 'pre-line'}}>
               总之，NX智能BI通过简化分析流程、智能化分析、可视化分析、个性化定制和高效的数据处理能力，为用户提供了一种高效、智能且可靠的数据分析平台，帮助用户更好地挖掘数据的价值，优化决策过程。
             </div>
           }
@@ -45,7 +45,7 @@ const Welcome: React.FC = () => {
           dataSource={data}
           renderItem={(item) => <List.Item>{item}</List.Item>}
         />
-        <Collapse items={items} defaultActiveKey={['1', '2', 3]} />
+        <Collapse items={items} defaultActiveKey={['1', '2', 3]}/>
       </Card>
     </PageContainer>
   );

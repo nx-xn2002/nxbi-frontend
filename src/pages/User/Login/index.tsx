@@ -81,7 +81,7 @@ const Login: React.FC = () => {
           }}
           logo={<img alt="logo" src="/logo.svg" />}
           title="NX智能 BI"
-          subTitle={'基于SpringBoot + MQ + AIGC的智能数据分析平台'}
+          subTitle={'基于SpringBoot + AIGC的智能数据分析平台'}
           onFinish={async (values) => {
             await handleSubmit(values as API.UserLoginRequest);
           }}

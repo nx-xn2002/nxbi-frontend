@@ -2,6 +2,7 @@ import {DefaultFooter} from '@ant-design/pro-components';
 import React, {useEffect, useState} from 'react';
 import {useModel} from "@@/exports";
 import {message} from "antd";
+import {request} from "@/app";
 
 const Footer: React.FC = () => {
   const {initialState} = useModel('@@initialState');
@@ -11,7 +12,7 @@ const Footer: React.FC = () => {
   useEffect(() => {
     if (initialState?.currentUser) {
       // 连接到 SSE 流
-      const eventSource = new EventSource('http://localhost:8081/api/user/getConn', { withCredentials: true });
+      const eventSource = new EventSource(request.baseURL + '/api/user/getConn', {withCredentials: true});
       // 监听消息
       eventSource.onmessage = (event) => {
         message.info(event.data);
